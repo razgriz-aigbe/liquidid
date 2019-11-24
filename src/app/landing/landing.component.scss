@@ -1,0 +1,30 @@
+.landing {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: white;
+  text-align: center;
+  //padding-top: 6%;
+}
+
+.new-key  {
+  width: 40%;
+  height: 60%;
+  display: inline-block;
+  margin-right: 20px;
+  margin-top: 8%;
+  cursor: pointer;
+  border-radius: 5px;
+  border: solid #6610f2 1px;
+}
+
+.existing-key {
+  width: 40%;
+  height: 60%;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 5px;
+  border: solid #6610f2 1px;
+}

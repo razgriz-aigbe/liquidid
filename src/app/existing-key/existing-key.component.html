@@ -1,0 +1,53 @@
+<div class="ex-bg">
+
+  <div class="data-input-area">
+    <div class="your-id-title">Your ID:</div>
+    <input type="text" placeholder="{{keyMan.currentKey}}" (click)="keyMan.generateNewID()" [disabled]="false" class="your-id-input">
+    <div class="new-data-title">INPUT NEW DATA:</div>
+    <div class="new-data-area">
+      <div class="field-name">Field Name</div>
+      <input type="text" class="field-name-input" [(ngModel)]="newData['key']">
+      <div class="field-info">Field Info</div>
+      <input type="text" class="field-info-input" [(ngModel)]="newData['value']">
+
+      <div class="encrypt-data-checkbox" (click)="toggleCheckbox()">
+        <div class="encrypt-true" *ngIf="isDataEncrypted"></div>
+      </div>
+      <div class="encrypt-data-title">Encrypt Data?</div>
+      <input *ngIf="isDataEncrypted" placeholder="Enter password" [(ngModel)]="tempPass" type="text" class="encryption-password">
+      <div class="save-data" (click)="storeData()">SAVE</div>
+    </div>
+  </div>
+
+
+  <div class="data-area">
+    <div class="data-toggle-box">
+      <div class="my-data" (click)="viewMyData()">MY DATA</div>
+      <div class="dapp-data" (click)="viewDappData()">DAPP DATA</div>
+    </div>
+    <div class="user-image" *ngIf="isViewingMyData"></div>
+    <div class="user-id" *ngIf="isViewingMyData">ID: {{keyMan.currentKey}}</div>
+    <ng-container *ngIf="isViewingMyData">
+      <div class="each-user-data"  *ngFor="let data of myData; let i = index">
+        <div class="each-user-data-field-title">{{data.key}}</div>
+        <div class="each-user-data-field-info" *ngIf="!data.decrypted">{{data.value}}</div>
+        <div class="each-user-data-field-info" *ngIf="data.decrypted">{{data.decrypted}}</div>
+        <div class="each-user-data-field-title" *ngIf="data.password && !data.decrypted">Password (data encrypted)</div>
+        <input type="text" placeholder="Enter Pass to Decrypt" (keyup)="decrypt($event, i)" class="each-user-data-field-encryption" *ngIf="data.password && !data.decrypted">
+        <div class="reencrypt" (click)="reEncrypt(i)" *ngIf="data.decrypted">Re-encrypt</div>
+      </div>
+    </ng-container>
+
+
+    <!--DAPP DATA AREA-->
+    <ng-container *ngIf="!isViewingMyData">
+      <div class="each-user-data"  *ngFor="let data of dappData">
+        <div class="each-user-data-field-title">{{data.key}}</div>
+        <div class="each-user-data-field-info">{{data.value}}</div>
+        <div class="each-user-data-field-title" *ngIf="data.password">Password (data encrypted)</div>
+        <div class="each-user-data-field-encryption" *ngIf="data.password"></div>
+      </div>
+    </ng-container>
+  </div>
+
+</div>
