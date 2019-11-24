@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { LandingComponent } from './landing/landing.component';
 import { CreateNewComponent } from './create-new/create-new.component';
 import { ExistingKeyComponent } from './existing-key/existing-key.component';
+import { NavComponent } from './nav/nav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingComponent,
     CreateNewComponent,
-    ExistingKeyComponent
+    ExistingKeyComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,

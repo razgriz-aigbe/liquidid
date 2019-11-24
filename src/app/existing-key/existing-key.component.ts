@@ -13,11 +13,10 @@ export class ExistingKeyComponent implements OnInit {
   isViewingMyData: boolean;
   myImage: string;
   tempPass: string;
-  myData = [];
   dappData = [];
   newData = {
     key: 'Enter a fieldname',
-    value: "Enter the data's value",
+    value: 'Enter the data\'s value',
     password: false
   };
   isDataEncrypted: boolean;
@@ -26,17 +25,9 @@ export class ExistingKeyComponent implements OnInit {
   ngOnInit() {
     this.isDataEncrypted = false;
     this.isViewingMyData = true;
-    this.myData = [];
 
-    this.dappData = [{
-      key: 'First Name',
-      value: 'John',
-      password: false
-    }, {
-      key: 'Last Name',
-      value: 'Doe',
-      password: false
-    }];
+
+    this.dappData = [];
   }
 
   viewMyData() {
@@ -58,18 +49,18 @@ export class ExistingKeyComponent implements OnInit {
         console.log(this.newData);
         this.newData.password = true;
         this.newData.value = CryptoJS.AES.encrypt(JSON.stringify(this.newData.value), this.tempPass).toString();
-        let dataToSave = this.newData;
-        this.myData.push(dataToSave);
-        console.log(this.myData);
+        const dataToSave = this.newData;
+        this.keyMan.myData.push(dataToSave);
+        console.log(this.keyMan.myData);
         this.newData = {
           key: 'Enter a fieldname',
-          value: "Enter the data's value",
+          value: 'Enter the data\'s value',
           password: false
         };
         this.tempPass = null;
       } else {
-        let dataToSave = this.newData;
-        this.myData.push(dataToSave);
+        const dataToSave = this.newData;
+        this.keyMan.myData.push(dataToSave);
       }
     } else {
       // Store Dapp data
@@ -79,10 +70,10 @@ export class ExistingKeyComponent implements OnInit {
 
   decrypt(e, index) {
     try {
-      const bytes = CryptoJS.AES.decrypt(this.myData[index].value, e.target.value);
+      const bytes = CryptoJS.AES.decrypt(this.keyMan.myData[index].value, e.target.value);
       if (bytes.toString()) {
         console.log(JSON.parse(bytes.toString(CryptoJS.enc.Utf8)));
-        this.myData[index].decrypted = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+        this.keyMan.myData[index].decrypted = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
       }
       // return data;
     } catch (e) {
@@ -91,7 +82,7 @@ export class ExistingKeyComponent implements OnInit {
   }
 
   reEncrypt(index) {
-    this.myData[index].decrypted = null;
+    this.keyMan.myData[index].decrypted = null;
   }
 
 }

@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class KeyManagerService {
   currentKey: string;
+  myData = [];
   constructor(private route: ActivatedRoute, private router: Router) {
     this.generateNewID();
   }
@@ -17,7 +18,15 @@ export class KeyManagerService {
     array = array.map(x => validChars.charCodeAt(x % validChars.length));
     const randomState = String.fromCharCode.apply(null, array);
     this.currentKey = randomState;
+    return this.resetData();
+  }
 
+  saveData(data) {
+    this.myData.push(data);
+  }
+
+  resetData() {
+    this.myData = [];
   }
 
 }

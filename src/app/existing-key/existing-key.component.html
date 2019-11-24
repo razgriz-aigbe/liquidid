@@ -2,7 +2,7 @@
 
   <div class="data-input-area">
     <div class="your-id-title">Your ID:</div>
-    <input type="text" placeholder="{{keyMan.currentKey}}" (click)="keyMan.generateNewID()" [disabled]="false" class="your-id-input">
+    <input type="text" placeholder="{{keyMan.currentKey}}" (keyup)="keyMan.resetData()" [(ngModel)]="keyMan.currentKey" [disabled]="false" class="your-id-input">
     <div class="new-data-title">INPUT NEW DATA:</div>
     <div class="new-data-area">
       <div class="field-name">Field Name</div>
@@ -28,7 +28,7 @@
     <div class="user-image" *ngIf="isViewingMyData"></div>
     <div class="user-id" *ngIf="isViewingMyData">ID: {{keyMan.currentKey}}</div>
     <ng-container *ngIf="isViewingMyData">
-      <div class="each-user-data"  *ngFor="let data of myData; let i = index">
+      <div class="each-user-data"  *ngFor="let data of keyMan.myData; let i = index">
         <div class="each-user-data-field-title">{{data.key}}</div>
         <div class="each-user-data-field-info" *ngIf="!data.decrypted">{{data.value}}</div>
         <div class="each-user-data-field-info" *ngIf="data.decrypted">{{data.decrypted}}</div>
