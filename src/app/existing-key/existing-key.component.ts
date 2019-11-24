@@ -25,7 +25,6 @@ export class ExistingKeyComponent implements OnInit {
 
   ngOnInit() {
     this.isDataEncrypted = false;
-    this.keyMan.currentKey = '4928520184HAKIA242';
     this.isViewingMyData = true;
     this.myData = [];
 

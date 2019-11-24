@@ -79,9 +79,10 @@ html, body {
 .user-id {
   display: inline-block;
   margin-left: 15px;
-  /* margin-top: -30px; */
-  top: -90px;
+  top: -72px;
+  width: 225px;
   position: relative;
+  word-break: break-all;
 }
 
 .each-user-data {
